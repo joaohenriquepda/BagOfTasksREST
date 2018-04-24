@@ -1,0 +1,23 @@
+version: '3'
+services:
+  db:
+    image: postgres:9.6-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - PGDATA=/postgresql
+      - PG_PASSWORD=distribuidos_password
+    volumes:
+      - ./tmp/data/postgresql:/postgresql
+  redis:
+    image: redis:latest  
+  api:
+    build: ./
+    command: rails s 
+    volumes:
+      - .:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - redis
+
