@@ -2,7 +2,10 @@ class ResultMatrixJob < ApplicationJob
   queue_as :result_matrix
 
   def perform(*args)
-    puts args
-    puts args[1]
+    puts "uuu"
+    puts args[0][:cel]
+    @matrix = MatrixCalculator.find(args[1])
+    @matrix.matrixB = [@matrix.matrixB, args[0]]
+    @matrix.save
   end
 end
