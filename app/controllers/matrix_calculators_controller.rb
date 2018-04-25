@@ -4,9 +4,7 @@ class MatrixCalculatorsController < ApplicationController
   # GET /matrix_calculators
   def index
     @matrix_calculators = MatrixCalculator.last
-
     render json: @matrix_calculators
-    
   end
 
   # GET /matrix_calculators/1
@@ -30,11 +28,6 @@ class MatrixCalculatorsController < ApplicationController
       CalcMatrixBJob.perform_later(matrixB2,@matrix_calculator.id)
       CalcMatrixJob.perform_later(matrixA1,@matrix_calculator.id)
       CalcMatrixJob.perform_later(matrixA2,@matrix_calculator.id)
-
-      # CalcMatrixJob.perform_later(matrixA1,@matrix_calculator.id)
-      # CalcMatrixBJob.perform_later(matrixB1,@matrix_calculator.id)
-      # CalcMatrixJob.perform_later(matrixA2,@matrix_calculator.id)
-      # CalcMatrixBJob.perform_later(matrixB2,@matrix_calculator.id)
 
       @matrix_calculator.matrixA = [matrixA1 , matrixA2]
       @matrix_calculator.matrixB = [matrixB1 , matrixB2]

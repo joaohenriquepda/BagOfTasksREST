@@ -10,8 +10,7 @@ class CalcMatrixJob < ApplicationJob
     when "A1" 
       queue1 = Sidekiq::Queue.new("calc_matrixB")
       queue1.each do |job1|
-        
-        
+                
         keyMatrizB= job1.item["args"][0]["arguments"][0]["key"]
 
         if (keyMatrizB == "B1") && (index == job1.item["args"][0]["arguments"][1])  
@@ -19,21 +18,18 @@ class CalcMatrixJob < ApplicationJob
           for i in 0..row.length
             total = total + (row[i].to_i() * job1.item["args"][0]["arguments"][0]["row"][i].to_i())
           end
-   
           result = {key:"C11",cel:total}
           ResultMatrixJob.perform_later(result,index)
        elsif (keyMatrizB == "B2") && (index == job1.item["args"][0]["arguments"][1])
-
           total = 0 
           for i in 0..row.length
             total = total + (row[i].to_i() * job1.item["args"][0]["arguments"][0]["row"][i].to_i())
           end
-
           result = {key:"C12",cel:total}
           ResultMatrixJob.perform_later(result,index)
         end
-
       end
+      
     when "A2"
        
       queue2 = Sidekiq::Queue.new("calc_matrixB")

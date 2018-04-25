@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20180425142959) do
     t.string "matrixB"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "matrixC", default: [], array: true
+    t.json "matrixC", default: [], array: true
   end
 
 end
