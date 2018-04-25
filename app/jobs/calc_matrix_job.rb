@@ -20,6 +20,7 @@ class CalcMatrixJob < ApplicationJob
           end
           result = {key:"C11",cel:total}
           ResultMatrixJob.perform_later(result,index)
+          job1.delete
        elsif (keyMatrizB == "B2") && (index == job1.item["args"][0]["arguments"][1])
           total = 0 
           for i in 0..row.length
@@ -27,6 +28,7 @@ class CalcMatrixJob < ApplicationJob
           end
           result = {key:"C12",cel:total}
           ResultMatrixJob.perform_later(result,index)
+          job1.delete
         end
       end
       
@@ -44,15 +46,15 @@ class CalcMatrixJob < ApplicationJob
           end
           result = {key:"C21",cel:total}
           ResultMatrixJob.perform_later(result,index)
-          
+          job2.delete
         elsif (keyMatrizB == "B2") && (index == job2.item["args"][0]["arguments"][1])
           total = 0 
           for i in 0..row.length
             total = total + (row[i].to_i() * job2.item["args"][0]["arguments"][0]["row"][i].to_i())
           end
-
           result = {key:"C22",cel:total}
           ResultMatrixJob.perform_later(result,index)
+          job2.delete
         end
 
       end
