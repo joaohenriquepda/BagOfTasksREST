@@ -10,13 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180422235904) do
+ActiveRecord::Schema.define(version: 20180425142959) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "matrix_calculators", force: :cascade do |t|
     t.string "matrixA"
     t.string "matrixB"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "matrixC", default: [], array: true
   end
 
 end
