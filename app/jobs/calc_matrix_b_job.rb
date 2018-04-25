@@ -1,5 +1,5 @@
 class CalcMatrixBJob < ApplicationJob
-  queue_as :matrixb
+  queue_as :matrixB
 
   def perform(*args)
     puts "awcrfrf"

@@ -2,36 +2,38 @@ class CalcMatrixJob < ApplicationJob
   queue_as :calc_matrix
 
   def perform(*args)
-    # puts args.to_json()
 
-    queue = Sidekiq::Queue.new("matrixb")
-  
-    queue.each do |job|
-    
-      keyMatrizA = job.item["args"][0]["arguments"][0]["key"]  
-      puts keyMatrizA
-    #   keyMatrizA = job.item["args"][0]["arguments"][0]["key"]
-    #   rowMatrizA =  job.item["args"][0]["arguments"][0]["row"]
-    #   puts keyMatrizA 
-      
-    #   # case keyMatrizA
-    #   # when "A1"
-    #   #   puts "A1 " 
-    #   #   queue1 = Sidekiq::Queue.new("matrixB")
-    #   #   queue1.each do |job1|
-    #   #     print "job1.to_json()"
-    #   #   end
-    #   # when "A2"
-    #   #   puts "A2 "
-    #   #   # queue2 = Sidekiq::Queue.new("matrixB")
-    #   #   # queue2.each do |job2|
-    #   #   #   # print job2.item["args"][0]["arguments"][0]["row"]
-    #   #   #   print "job2.to_json()"
-    #   #   # end
-    #   #   # queue2.clear
-    #   # else
-    #   # end
-    
+    index = args[1]
+
+    case args[0][:key]
+    when "A1" 
+      queue1 = Sidekiq::Queue.new("matrixB")
+      queue1.each do |job1|
+          
+        keyMatrizB= job1.item["args"][0]["arguments"][0]["key"]
+
+        if (keyMatrizB == "B1") && (index == job1.item["args"][0]["arguments"][1])  
+          puts "wsedt"
+        elsif (keyMatrizB == "B2") && (index == job1.item["args"][0]["arguments"][1])
+          puts "putt"
+        end
+
+      end
+    when "A2"
+       
+      queue2 = Sidekiq::Queue.new("matrixB")
+      queue2.each do |job2|
+          
+        keyMatrizB= job2.item["args"][0]["arguments"][0]["key"]
+          
+        if (keyMatrizB == "B1") && (index == job2.item["args"][0]["arguments"][1])  
+          puts "wsedt"
+        elsif (keyMatrizB == "B2") && (index == job2.item["args"][0]["arguments"][1])
+          puts "putt"
+        end
+
+      end
+    else
     end
 
   end
