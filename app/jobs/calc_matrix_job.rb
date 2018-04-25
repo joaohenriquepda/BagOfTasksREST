@@ -1,5 +1,5 @@
 class CalcMatrixJob < ApplicationJob
-  queue_as :calc_matrix
+  queue_as :calc_matrixA
 
   def perform(*args)
 
@@ -8,7 +8,7 @@ class CalcMatrixJob < ApplicationJob
 
     case args[0][:key]
     when "A1" 
-      queue1 = Sidekiq::Queue.new("matrixB")
+      queue1 = Sidekiq::Queue.new("calc_matrixB")
       queue1.each do |job1|
         
         
@@ -36,7 +36,7 @@ class CalcMatrixJob < ApplicationJob
       end
     when "A2"
        
-      queue2 = Sidekiq::Queue.new("matrixB")
+      queue2 = Sidekiq::Queue.new("calc_matrixB")
       queue2.each do |job2|
           
         keyMatrizB= job2.item["args"][0]["arguments"][0]["key"]

@@ -26,10 +26,10 @@ class MatrixCalculatorsController < ApplicationController
       matrixA1 = {key:"A1",row:[2,3,1]}
       matrixA2 = {key:"A2",row:[-1,0,2]}
 
-      CalcMatrixJob.perform_later(matrixA2,@matrix_calculator.id)
+      CalcMatrixBJob.perform_later(matrixB1,@matrix_calculator.id)
       CalcMatrixBJob.perform_later(matrixB2,@matrix_calculator.id)
       CalcMatrixJob.perform_later(matrixA1,@matrix_calculator.id)
-      CalcMatrixBJob.perform_later(matrixB1,@matrix_calculator.id)
+      CalcMatrixJob.perform_later(matrixA2,@matrix_calculator.id)
 
       # CalcMatrixJob.perform_later(matrixA1,@matrix_calculator.id)
       # CalcMatrixBJob.perform_later(matrixB1,@matrix_calculator.id)
